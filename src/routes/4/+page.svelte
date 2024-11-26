@@ -4,6 +4,7 @@
 	import ZoomableTimeseries from '$lib/components/charts/ZoomableTimeseries.svelte';
 	import type { Chart } from '$lib/utils/Wrapper';
 	import CurrencyFilter from '$lib/components/filters/CurrencyFilter.svelte';
+	import CoinFilter from '$lib/components/filters/CoinFilter.svelte';
 
 	let chart: Chart;
 
@@ -30,7 +31,6 @@
 			return [t[0], t[1] * 1000000];
 		});
 
-		console.log(prices);
 		return prices;
 	}
 
@@ -38,10 +38,16 @@
 		return await api.get('simple/supported_vs_currencies');
 	}
 
-	let options: string[]; 
+	async function getCoins() {
+		return await api.get('coins/list');
+	}
+
+	let currencyOptions: string[];
+	let coinOptions: string[];
 
 	onMount(async () => {
-		options = await getCurrencies();
+		currencyOptions = await getCurrencies();
+		coinOptions = await getCoins();
 
 		series = [
 			{
@@ -63,12 +69,24 @@
 	<ZoomableTimeseries {series} {title} bind:chart></ZoomableTimeseries>
 </div>
 
-{#if options}
-	{#await options}
-		<p>you rolled a!</p>
-	{:then options}
+<!-- {#if currencyOptions}
+	{#await currencyOptions}
+		<p>Loading...</p>
+	{:then currencyOptions}
 		<div class="h-96 w-96 p-2">
-			<CurrencyFilter {options} on:currency-selected={hdlCurrencySelection}></CurrencyFilter>
+			<CurrencyFilter {currencyOptions} on:currency-selected={hdlCurrencySelection}></CurrencyFilter>
+		</div>
+	{:catch error}
+		<p style="color: red">{error.message}</p>
+	{/await}
+{/if} -->
+
+{#if coinOptions}
+	{#await coinOptions}
+		<p>Loading...</p>
+	{:then coinOptions}
+		<div class="h-96 w-96 p-2">
+			<CoinFilter {coinOptions} on:currency-selected={hdlCurrencySelection}></CoinFilter>
 		</div>
 	{:catch error}
 		<p style="color: red">{error.message}</p>
