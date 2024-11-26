@@ -18,8 +18,8 @@
 		placement: 'bottom'
 	};
 
-	export let options: string[];
-	export let currencyOptions: CurrencyOption[] = options?.map((o: string) => {
+	export let currencyOptions: string[];
+	export let options: CurrencyOption[] = currencyOptions?.map((o: string) => {
 		return { label: o, value: o };
 	});
 
@@ -45,7 +45,7 @@
 	<div class="h-40 overflow-y-auto">
 		<Autocomplete
 			bind:input={inputPopupDemo}
-			options={currencyOptions}
+			{options}
 			on:selection={onPopupDemoSelect}
 		/>
 	</div>
