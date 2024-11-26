@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { dataSeries } from '$lib/assets/irregular-data-series';
+	import { seriesData } from '$lib/assets/ohlc';
+	import CandlestickCombo from '$lib/components/charts/CandlestickCombo.svelte';
 	import Stepline from '$lib/components/charts/Stepline.svelte';
 	// import TestWrapper from '$lib/components/charts/TestWrapper.svelte';
 	// import ZoomableTimeseries from '$lib/components/charts/ZoomableTimeseries.svelte';
@@ -16,7 +18,7 @@
 
 	let series = [
 		{
-			data: [34, 44, 54, 21, 12, 43, 33, 23, 66, 66, 58]
+			data: seriesData
 		}
 	];
 
@@ -29,5 +31,6 @@
 <div class="h-96 w-96">
 	<!-- <TestWrapper></TestWrapper> -->
 	<!-- <ZoomableTimeseries {series} {title}></ZoomableTimeseries> -->
-	<Stepline {series} {title}></Stepline>
+	<!-- <Stepline {series} {title}></Stepline> -->
+	 <CandlestickCombo {series}></CandlestickCombo>
 </div>
