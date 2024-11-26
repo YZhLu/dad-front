@@ -2,6 +2,7 @@
 	import { dataSeries } from '$lib/assets/irregular-data-series';
 	import { seriesData } from '$lib/assets/ohlc';
 	import CandlestickCombo from '$lib/components/charts/CandlestickCombo.svelte';
+	import SlopeBasic from '$lib/components/charts/SlopeBasic.svelte';
 	import SlopeMultiGroup from '$lib/components/charts/SlopeMultiGroup.svelte';
 	import Stepline from '$lib/components/charts/Stepline.svelte';
 	// import TestWrapper from '$lib/components/charts/TestWrapper.svelte';
@@ -19,73 +20,44 @@
 
 	let series: ApexAxisChartSeries = [
 		{
-			name: 'Blue',
-			data: [
-				{
-					x: 'Category 1',
-					y: 503
-				},
-				{
-					x: 'Category 2',
-					y: 580
-				},
-				{
-					x: 'Category 3',
-					y: 135
-				}
-			]
-		},
-		{
-			name: 'Green',
-			data: [
-				{
-					x: 'Category 1',
-					y: 733
-				},
-				{
-					x: 'Category 2',
-					y: 385
-				},
-				{
-					x: 'Category 3',
-					y: 715
-				}
-			]
-		},
-		{
-			name: 'Orange',
-			data: [
-				{
-					x: 'Category 1',
-					y: 255
-				},
-				{
-					x: 'Category 2',
-					y: 211
-				},
-				{
-					x: 'Category 3',
-					y: 441
-				}
-			]
-		},
-		{
-			name: 'Red',
-			data: [
-				{
-					x: 'Category 1',
-					y: 428
-				},
-				{
-					x: 'Category 2',
-					y: 749
-				},
-				{
-					x: 'Category 3',
-					y: 559
-				}
-			]
-		}
+            name: 'Blue',
+            data: [
+              {
+                x: 'Jan',
+                y: 43,
+              },
+              {
+                x: 'Feb',
+                y: 58,
+              },
+            ],
+          },
+          {
+            name: 'Green',
+            data: [
+              {
+                x: 'Jan',
+                y: 33,
+              },
+              {
+                x: 'Feb',
+                y: 38,
+              },
+            ],
+          },
+          {
+            name: 'Red',
+            data: [
+              {
+                x: 'Jan',
+                y: 55,
+              },
+              {
+                x: 'Feb',
+                y: 21,
+              },
+            ],
+          },
 	];
 
 	let title: ApexTitleSubtitle = {
@@ -99,5 +71,6 @@
 	<!-- <ZoomableTimeseries {series} {title}></ZoomableTimeseries> -->
 	<!-- <Stepline {series} {title}></Stepline> -->
 	<!-- <CandlestickCombo {series}></CandlestickCombo> -->
-	<SlopeMultiGroup {series}></SlopeMultiGroup>
+	<!-- <SlopeMultiGroup {series}></SlopeMultiGroup> -->
+	 <SlopeBasic {series}></SlopeBasic>
 </div>
