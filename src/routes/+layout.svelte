@@ -1,6 +1,9 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { autoModeWatcher } from '@skeletonlabs/skeleton';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
+	// import { getModeOsPrefers, getModeUserPrefers, getModeAutoPrefers } from '@skeletonlabs/skeleton';
 
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
@@ -20,8 +23,12 @@
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
+	
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	
 </script>
+
+<svelte:head>{@html '<script>(' + autoModeWatcher.toString() + ')();</script>'}</svelte:head>
 
 <!-- App Shell -->
 <AppShell>
@@ -56,6 +63,7 @@
 				>
 					GitHub
 				</a>
+				<LightSwitch />
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
