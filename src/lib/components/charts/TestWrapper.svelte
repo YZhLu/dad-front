@@ -1,39 +1,78 @@
 <script lang="ts">
+	import { dataSeries } from '$lib/assets/irregular-data-series';
 	import { renderChart, type Chart } from '$lib/utils/Wrapper';
+	
+  let ts2 = 1484418600000;
+	let dates = [];
+	let spikes = [5, -5, 3, -3, 8, -8];
+	
+  for (let i = 0; i < 120; i++) {
+		ts2 = ts2 + 86400000;
+		let innerArr = [ts2, dataSeries[1][i].value];
+		dates.push(innerArr);
+	 }
 
 	const chart: Chart = {
 		options: {
 			series: [
 				{
-					name: 'Desktops',
-					data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+					name: 'XYZ MOTORS',
+					data: dates
 				}
 			],
 			chart: {
+				type: 'area',
+				stacked: false,
 				height: 350,
-				type: 'line',
 				zoom: {
-					enabled: false
+					type: 'x',
+					enabled: true,
+					autoScaleYaxis: true
+				},
+				toolbar: {
+					autoSelected: 'zoom'
 				}
 			},
 			dataLabels: {
 				enabled: false
 			},
-			stroke: {
-				curve: 'straight'
+			markers: {
+				size: 0
 			},
 			title: {
-				text: 'Product Trends by Month',
+				text: 'Stock Price Movement',
 				align: 'left'
 			},
-			grid: {
-				row: {
-					colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-					opacity: 0.5
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shadeIntensity: 1,
+					inverseColors: false,
+					opacityFrom: 0.5,
+					opacityTo: 0,
+					stops: [0, 90, 100]
+				}
+			},
+			yaxis: {
+				labels: {
+					formatter: function (val) {
+						return (val / 1000000).toFixed(0);
+					}
+				},
+				title: {
+					text: 'Price'
 				}
 			},
 			xaxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+				type: 'datetime'
+			},
+			tooltip: {
+				shared: false,
+				y: {
+					formatter: function (val) {
+						return (val / 1000000).toFixed(0);
+					}
+				}
 			}
 		}
 	};
