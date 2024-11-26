@@ -48,9 +48,9 @@
 		tooltip: {
 			shared: false,
 			y: {
-				formatter: function (val) {
-					return (val / 1000000).toFixed(0);
-				}
+				// formatter: function (val) {
+				// 	return (val / 1000000).toFixed(0);
+				// }
 			}
 		}
 	};
@@ -58,8 +58,9 @@
 	export let series:ApexAxisChartSeries;
 	export let title:ApexTitleSubtitle;
 	export let options = _options;
+	//export let chartRef: Chart;
 	
-    const chart: Chart = {
+    export let chart: Chart = {
 		options: { ...options, series, title }
 	};
 </script>
