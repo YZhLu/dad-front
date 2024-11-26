@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { dataSeries } from '$lib/assets/irregular-data-series';
+	import Stepline from '$lib/components/charts/Stepline.svelte';
 	// import TestWrapper from '$lib/components/charts/TestWrapper.svelte';
-	import ZoomableTimeseries from '$lib/components/charts/ZoomableTimeseries.svelte';
+	// import ZoomableTimeseries from '$lib/components/charts/ZoomableTimeseries.svelte';
 
 	let ts2 = 1484418600000;
 	let dates = [];
@@ -15,19 +16,18 @@
 
 	let series = [
 		{
-			name: 'XYZ MOTORS',
-			data: dates
+			data: [34, 44, 54, 21, 12, 43, 33, 23, 66, 66, 58]
 		}
 	];
-	
+
 	let title: ApexTitleSubtitle = {
-		text: 'Stock Price Movement',
+		text: 'Stepline Chart',
 		align: 'left'
 	};
-
 </script>
 
 <div class="h-96 w-96">
 	<!-- <TestWrapper></TestWrapper> -->
-	<ZoomableTimeseries {series} {title}></ZoomableTimeseries>
+	<!-- <ZoomableTimeseries {series} {title}></ZoomableTimeseries> -->
+	<Stepline {series} {title}></Stepline>
 </div>
