@@ -66,10 +66,6 @@
 	}
 </script>
 
-<div class="w-full">
-	<ZoomableTimeseries {series} {title} bind:chart></ZoomableTimeseries>
-</div>
-
 <div class="flex gap-3">
 	{#if currencyOptions}
 		{#await currencyOptions}
@@ -99,4 +95,8 @@
 	<div class="">
 		<DateFilter></DateFilter>
 	</div>
+</div>
+
+<div class="w-full">
+	<ZoomableTimeseries {series} {title} bind:chart></ZoomableTimeseries>
 </div>
