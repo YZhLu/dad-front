@@ -5,6 +5,7 @@
 	import type { Chart } from '$lib/utils/Wrapper';
 	import CurrencyFilter from '$lib/components/filters/CurrencyFilter.svelte';
 	import CoinFilter from '$lib/components/filters/CoinFilter.svelte';
+	import DateFilter from '$lib/components/filters/DateFilter.svelte';
 
 	let chart: Chart;
 
@@ -69,26 +70,33 @@
 	<ZoomableTimeseries {series} {title} bind:chart></ZoomableTimeseries>
 </div>
 
-<!-- {#if currencyOptions}
-	{#await currencyOptions}
-		<p>Loading...</p>
-	{:then currencyOptions}
-		<div class="h-96 w-96 p-2">
-			<CurrencyFilter {currencyOptions} on:currency-selected={hdlCurrencySelection}></CurrencyFilter>
-		</div>
-	{:catch error}
-		<p style="color: red">{error.message}</p>
-	{/await}
-{/if} -->
+<div class="flex gap-3">
+	{#if currencyOptions}
+		{#await currencyOptions}
+			<p>Loading...</p>
+		{:then currencyOptions}
+			<div class=" p-2">
+				<CurrencyFilter {currencyOptions} on:currency-selected={hdlCurrencySelection}
+				></CurrencyFilter>
+			</div>
+		{:catch error}
+			<p style="color: red">{error.message}</p>
+		{/await}
+	{/if}
 
-{#if coinOptions}
-	{#await coinOptions}
-		<p>Loading...</p>
-	{:then coinOptions}
-		<div class="h-96 w-96 p-2">
-			<CoinFilter {coinOptions} on:currency-selected={hdlCurrencySelection}></CoinFilter>
-		</div>
-	{:catch error}
-		<p style="color: red">{error.message}</p>
-	{/await}
-{/if}
+	{#if coinOptions}
+		{#await coinOptions}
+			<p>Loading...</p>
+		{:then coinOptions}
+			<div class=" p-2">
+				<CoinFilter {coinOptions} on:currency-selected={hdlCurrencySelection}></CoinFilter>
+			</div>
+		{:catch error}
+			<p style="color: red">{error.message}</p>
+		{/await}
+	{/if}
+
+	<div class="">
+		<DateFilter></DateFilter>
+	</div>
+</div>
