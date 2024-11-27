@@ -5,7 +5,8 @@
 	let _options: ApexOptions = {
 		chart: {
 			type: 'line',
-			height: 350
+			height: '100%',
+			width: '100%',
 		},
 		stroke: {
 			curve: 'stepline'
@@ -20,8 +21,15 @@
 		}
 	};
 
-	export let series: ApexAxisChartSeries;
-	export let title: ApexTitleSubtitle;
+	export let series: ApexAxisChartSeries = [
+		{
+			data: [34, 44, 54, 21, 12, 43, 33, 23, 66, 66, 58]
+		}
+	];
+	export let title: ApexTitleSubtitle = {
+		text: 'TEST DATA',
+		align: 'left'
+	};
 	export let options = _options;
 
 	const chart: Chart = {
