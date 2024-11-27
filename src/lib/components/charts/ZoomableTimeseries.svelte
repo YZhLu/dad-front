@@ -2,11 +2,25 @@
 	import { renderChart, type Chart } from '$lib/utils/Wrapper';
 	import type { ApexOptions } from 'apexcharts';
 
+	import { dataSeries } from '$lib/assets/irregular-data-series';
+
+	let ts2 = 1484418600000;
+	let dates = [];
+	let spikes = [5, -5, 3, -3, 8, -8];
+
+	for (let i = 0; i < 120; i++) {
+		ts2 = ts2 + 86400000;
+		let innerArr = [ts2, dataSeries[1][i].value];
+		dates.push(innerArr);
+	}
+	console.log('dates', dates);
+
 	let _options: ApexOptions = {
 		chart: {
 			type: 'area',
 			stacked: false,
-			height: 350,
+			height: '100%',
+			width: '100%',
 			zoom: {
 				type: 'x',
 				enabled: true,
@@ -55,12 +69,20 @@
 		}
 	};
 
-	export let series:ApexAxisChartSeries;
-	export let title:ApexTitleSubtitle;
+	export let series: ApexAxisChartSeries = [
+		{
+			name: 'XYZ MOTORS',
+			data: dates
+		}
+	];
+	export let title: ApexTitleSubtitle = {
+				text: 'TEST DATA',
+				align: 'left'
+			};
 	export let options = _options;
 	//export let chartRef: Chart;
-	
-    export let chart: Chart = {
+
+	export let chart: Chart = {
 		options: { ...options, series, title }
 	};
 </script>
