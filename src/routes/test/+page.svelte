@@ -5,6 +5,7 @@
 	import SlopeBasic from '$lib/components/charts/SlopeBasic.svelte';
 	import SlopeMultiGroup from '$lib/components/charts/SlopeMultiGroup.svelte';
 	import Stepline from '$lib/components/charts/Stepline.svelte';
+	import TestWrapper from '$lib/components/charts/TestWrapper.svelte';
 	// import TestWrapper from '$lib/components/charts/TestWrapper.svelte';
 	// import ZoomableTimeseries from '$lib/components/charts/ZoomableTimeseries.svelte';
 
@@ -70,7 +71,7 @@
 	<!-- <TestWrapper></TestWrapper> -->
 	<!-- <ZoomableTimeseries {series} {title}></ZoomableTimeseries> -->
 	<!-- <Stepline {series} {title}></Stepline> -->
-	<!-- <CandlestickCombo {series}></CandlestickCombo> -->
+	<CandlestickCombo></CandlestickCombo>
 	<!-- <SlopeMultiGroup {series}></SlopeMultiGroup> -->
-	 <SlopeBasic {series}></SlopeBasic>
+	 <!-- <SlopeBasic {series}></SlopeBasic> -->
 </div>
