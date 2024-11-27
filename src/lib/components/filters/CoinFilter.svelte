@@ -35,11 +35,11 @@
 </script>
 
 <input
-	class="input autocomplete w-48"
+	class="input autocomplete w-48 h-8"
 	type="search"
 	name="coin-search"
 	bind:value={inputCoin}
-	placeholder="Select coin..."
+	placeholder="Search coin..."
 	use:popup={popupSettings}
 />
 
