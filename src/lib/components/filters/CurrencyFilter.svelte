@@ -32,11 +32,11 @@
 </script>
 
 <input
-	class="input autocomplete w-48"
+	class="input autocomplete w-[120px] h-8"
 	type="search"
 	name="autocomplete-search"
 	bind:value={inputPopupDemo}
-	placeholder="Select currency..."
+	placeholder="Currency..."
 	use:popup={popupSettings}
 />
 
