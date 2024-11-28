@@ -20,11 +20,9 @@
 
 	export let coinOptions: any[];
 
-	console.log(coinOptions)
 	export let options: any = coinOptions?.slice(0,1000).map((o: any) => {
 		return { ...o, label: o.name, value: o.id };
 	});
-	console.log(options)
 
 	function onPopupDemoSelect(event: CustomEvent<any>): void {
 		inputCoin = event.detail.label;
