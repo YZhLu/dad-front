@@ -40,13 +40,9 @@
 	use:popup={popupSettings}
 />
 
-<div data-popup="popupAutocomplete" class="card w-48 shadow-xl py-2 ">
+<div data-popup="popupAutocomplete" class="card w-48 shadow-xl py-2">
 	<div class="arrow bg-surface-800-100-token" />
 	<div class="h-40 overflow-y-auto">
-		<Autocomplete
-			bind:input={inputPopupDemo}
-			{options}
-			on:selection={onPopupDemoSelect}
-		/>
+		<Autocomplete bind:input={inputPopupDemo} {options} on:selection={onPopupDemoSelect} />
 	</div>
 </div>
