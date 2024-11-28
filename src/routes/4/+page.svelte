@@ -6,6 +6,8 @@
 	import CurrencyFilter from '$lib/components/filters/CurrencyFilter.svelte';
 	import CoinFilter from '$lib/components/filters/CoinFilter.svelte';
 	import DateFilter from '$lib/components/filters/DateFilter.svelte';
+	import { getCryptoPrice } from '$lib/services/getPrice';
+	import { getHistorical } from '$lib/services/getHistorical';
 
 	let chart: Chart;
 
@@ -53,16 +55,38 @@
 		series = [
 			{
 				name: 'Bitcoin2',
-				data: await get_btc()
+				data: await getHistorical('bitcoin','usd',1)//await getCryptoPrice('bitcoin','usd')//get_btc()
 			}
 		];
 
 		chart.ref?.updateSeries(series);
 	});
 
-	function hdlCurrencySelection(e: CustomEvent<any>): void {
+	async function hdlCurrencySelection(e: CustomEvent<any>): Promise<void> {
 		const d = e.detail;
-		alert(JSON.stringify(d));
+		console.log(d)
+		series = [
+			{
+				name: 'Bitcoin2',
+				data: await getHistorical('bitcoin','usd',d.dateSpan)//await getCryptoPrice('bitcoin','usd')//get_btc()
+			}
+		];
+
+		chart.ref?.updateSeries(series);
+	}
+
+
+	async function hdlDateSelection(e: CustomEvent<any>): Promise<void> {
+		const d = e.detail;
+		series = [
+			{
+				name: 'Bitcoin2',
+				data: await getHistorical('bitcoin','usd',d.dateSpan)//await getCryptoPrice('bitcoin','usd')//get_btc()
+			}
+		];
+
+		chart.ref?.updateSeries(series);
+		
 	}
 </script>
 
@@ -93,7 +117,7 @@
 	{/if}
 
 	<div class="">
-		<DateFilter></DateFilter>
+		<DateFilter on:date-selected={hdlDateSelection}></DateFilter>
 	</div>
 </div>
 
