@@ -6,8 +6,15 @@
 
 	import * as api from '$lib/services/api';
 	import { onMount } from 'svelte';
-	import type { Chart } from '$lib/utils/Wrapper';
 	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton';
+	import { findOrCreateStore } from '$lib/views/dashboarStore';
+
+	const storeKey = 'unique-key';
+	let store = findOrCreateStore(storeKey);
+	let currencyOptions: string[];
+	let coinOptions: string[];
+
+	const { dateSpan, currency } = store;
 
 	async function getCurrencies() {
 		return await api.get('simple/supported_vs_currencies');
@@ -17,63 +24,24 @@
 		return await api.get('coins/list');
 	}
 
-	async function get_btc(): Promise<[number, number][]> {
-		const body = await api.get(
-			//'coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=daily&precision=1'
-			// 'coins/bitcoin/market_chart?vs_currency=usd&days=1&precision=2'
-			'coins/bitcoin/market_chart/range?vs_currency=usd&from=1711929600&to=1732643425'
-		);
-
-		const prices: [number, number][] = body.prices.map((t: any) => {
-			return [t[0], t[1] * 1000000];
-		});
-
-		return prices;
+	async function hdlCurrencySelection(e: CustomEvent<any>): Promise<void> {
+		store.currency.set(e.detail.currency);
+		store.updateSeries4($currency);
 	}
-	let chart: Chart;
-	let currencyOptions: string[];
-	let coinOptions: string[];
 
-	let title: ApexTitleSubtitle = {
-		text: 'Gráfico 4',
-		align: 'left'
-	};
+	async function hdlDateSelection(e: CustomEvent<any>): Promise<void> {
+		store.dateSpan.set(e.detail.dateSpan);
+		store.updateSeries4($dateSpan);
+	}
 
-	let series: ApexAxisChartSeries = [
-		{
-			name: 'Bitcoin',
-			data: []
-		}
-	];
-
-	let data: any;
+	function hdlCoinSelection(e: CustomEvent<any>): void {
+		throw new Error('Function not implemented.');
+	}
 
 	onMount(async () => {
 		currencyOptions = await getCurrencies();
 		coinOptions = await getCoins();
-
-		series = [
-			{
-				name: 'Bitcoin2',
-				data: await get_btc()
-			}
-		];
-
-		//chart.ref?.updateSeries(series);
-
-		data = {
-			series,
-			title,
-			chart
-		};
-
-		console.log(data);
 	});
-
-	function hdlCurrencySelection(e: CustomEvent<any>): void {
-		const d = e.detail;
-		alert(JSON.stringify(d));
-	}
 </script>
 
 <AppShell slotFooter="z-10 p-2 px-4 flex justify-end bg-surface-100-800-token">
@@ -91,7 +59,7 @@
 							<p>Loading...</p>
 						{:then coinOptions}
 							<div class="">
-								<CoinFilter {coinOptions} on:currency-selected={hdlCurrencySelection}></CoinFilter>
+								<CoinFilter {coinOptions} on:currency-selected={hdlCoinSelection}></CoinFilter>
 							</div>
 						{:catch error}
 							<p style="color: red">{error.message}</p>
@@ -119,17 +87,12 @@
 				{/await}
 			{/if}
 
-			<DateFilter></DateFilter>
+			<DateFilter on:date-selected={hdlDateSelection}></DateFilter>
 		</div>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	{#if data}
-		{#await data}
-			Loading...
-		{:then data}
-			<div class="bg-surface-50-900-token h-full">
-				<Dashboard {data}></Dashboard>
-			</div>
-		{/await}
-	{/if}
+
+	<div class="bg-surface-50-900-token h-full">
+		<Dashboard {store}></Dashboard>
+	</div>
 </AppShell>

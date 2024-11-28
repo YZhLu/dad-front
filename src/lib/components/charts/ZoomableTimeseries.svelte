@@ -13,7 +13,6 @@
 		let innerArr = [ts2, dataSeries[1][i].value];
 		dates.push(innerArr);
 	}
-	console.log('dates', dates);
 
 	let _options: ApexOptions = {
 		chart: {
@@ -49,7 +48,7 @@
 		yaxis: {
 			labels: {
 				formatter: function (val) {
-					return (val / 1000000).toFixed(0);
+					return (`${val}`)/// 1000000).toFixed(0);
 				}
 			},
 			title: {
